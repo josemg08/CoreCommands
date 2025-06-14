@@ -1,3 +1,4 @@
+//.___ Configure Plugin __.//
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
@@ -23,6 +24,7 @@ dependencies {
 
         // Add necessary plugin dependencies for compilation here, example:
         // bundledPlugin("com.intellij.java")
+        bundledPlugin("org.jetbrains.plugins.terminal")
     }
 }
 

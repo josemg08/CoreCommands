@@ -1,4 +1,4 @@
-package com.corecommands.icons
+package com.corecommands.views
 
 import com.intellij.ui.JBColor
 import javax.swing.JButton

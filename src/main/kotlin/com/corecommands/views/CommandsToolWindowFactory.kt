@@ -1,4 +1,4 @@
-package com.corecommands.icons
+package com.corecommands.views
 
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
@@ -7,51 +7,30 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.JBColor
 import com.intellij.ui.content.ContentFactory
 import com.intellij.util.ui.JBInsets
+import runCommandInTerminal
 import java.awt.BorderLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.util.*
 import javax.swing.*
 
-/*object SdkIcons {
-    val Sdk_default_icon: Icon = getIcon("/icons/androidMustache.svg", SdkIcons::class.java)
-}*/
-
 internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
+
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val toolWindowContent = CalendarToolWindowContent(toolWindow)
+        val toolWindowContent = CommandsToolWindowContent(project = project)
         val content = ContentFactory.getInstance().createContent(toolWindowContent.contentPanel, "", false)
         toolWindow.contentManager.addContent(content)
     }
 
-    private class CalendarToolWindowContent(toolWindow: ToolWindow) {
+    private class CommandsToolWindowContent(project: Project) {
         val contentPanel: JPanel = JPanel()
-        private val currentDate = JLabel()
-        private val timeZone = JLabel()
-        private val currentTime = JLabel()
 
         init {
             contentPanel.setLayout(BorderLayout(0, 20))
             contentPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0))
-            contentPanel.add(createCalendarPanel(), BorderLayout.PAGE_START)
-            contentPanel.add(createControlsPanel(toolWindow), BorderLayout.CENTER)
-            runReformatCommandOnTerminal()
+            contentPanel.add(createControlsPanel(project = project), BorderLayout.CENTER)
         }
 
-        fun createCalendarPanel(): JPanel {
-            val calendarPanel = JPanel()
-            setIconLabel(currentDate, ANDROID_MUSTACHE_PATH)
-            calendarPanel.add(currentDate)
-            calendarPanel.add(timeZone)
-            calendarPanel.add(currentTime)
-            return calendarPanel
-        }
-
-        fun setIconLabel(label: JLabel, imagePath: String) {
-            label.setIcon(ImageIcon(Objects.requireNonNull(javaClass.getResource(imagePath))))
-        }
-
-        fun createControlsPanel(toolWindow: ToolWindow): JPanel {
+        fun createControlsPanel(project: Project): JPanel {
             val controlsPanel = JPanel()
             controlsPanel.layout = GridBagLayout()
             controlsPanel.border = BorderFactory.createEmptyBorder(20, 20, 20, 20)
@@ -63,15 +42,17 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
             gridConstraintsLayout.weightx = 1.0
 
             addRowsToGridConstraints(
-                listOf(
+                rows = listOf(
                     CommandRow(
                         buttonText = "Reformat",
                         description = "Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.",
-                        onClick = this::runReformatCommandOnTerminal),
+                        onClick = { runReformatCommandOnTerminal(project) }
+                    ),
                     CommandRow(
                         buttonText = "Compile Project",
                         description = "Compiles all project sources and resources. Use this to ensure your code builds successfully before running or deploying.",
-                        onClick = this::runBuildCommandOnTerminal)
+                        onClick = { runBuildCommandOnTerminal(project) }
+                    )
                 ),
                 gridConstraintsLayout,
                 controlsPanel
@@ -102,12 +83,18 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
             }
         }
 
-        fun runReformatCommandOnTerminal() {
-            //TODO
+        fun runReformatCommandOnTerminal(project: Project) {
+            runCommandInTerminal(
+                project = project,
+                command = "./local_helpers.sh -f RUN_FORMAT"
+            )
         }
 
-        fun runBuildCommandOnTerminal() {
-            //TODO
+        fun runBuildCommandOnTerminal(project: Project) {
+            runCommandInTerminal(
+                project = project,
+                command = "./gradlew app:assembleGoogleDebug"
+            )
         }
 
         private class CommandRow(
@@ -121,14 +108,11 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
                 onClick
             )
 
-            val descriptionLabel = JLabel("<html><div style='margin-left:12px;width:220px;'>$description</div></html>").apply {
-                foreground = JBColor(0x787878, 0x787878)
-                font = font.deriveFont(13f)
-            }
-        }
-
-        companion object {
-            private const val ANDROID_MUSTACHE_PATH = "/icons/androidMustache.svg"
+            val descriptionLabel =
+                JLabel("<html><div style='margin-left:12px;width:220px;'>$description</div></html>").apply {
+                    foreground = JBColor(0x787878, 0x787878)
+                    font = font.deriveFont(13f)
+                }
         }
     }
 }
