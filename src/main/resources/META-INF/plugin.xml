@@ -10,8 +10,8 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.rappi.com">Rappi</vendor>
+    <!--.___ A displayed Vendor name or Organization ID displayed on the Plugins Page. __.-->
+    <vendor url="https://github.com/josemg08/CoreCommands">Github CoreCommands</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
