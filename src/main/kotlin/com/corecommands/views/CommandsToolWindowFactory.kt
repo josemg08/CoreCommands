@@ -23,7 +23,7 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
      * param buttonText The text to display on the button.
      * param description The description of the command to be displayed.
      * param command The command to be executed when the button is clicked.
-     __.*/
+    __.*/
     private fun initCommandRows(project: Project): List<CommandRow> {
         return listOf(
             CommandRow(
