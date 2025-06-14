@@ -10,14 +10,12 @@ import com.intellij.util.ui.JBInsets
 import java.awt.BorderLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.net.URL
 import java.util.*
 import javax.swing.*
 
 /*object SdkIcons {
     val Sdk_default_icon: Icon = getIcon("/icons/androidMustache.svg", SdkIcons::class.java)
 }*/
-
 
 internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -50,73 +48,58 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
         }
 
         fun setIconLabel(label: JLabel, imagePath: String) {
-            label.setIcon(ImageIcon(Objects.requireNonNull<URL?>(javaClass.getResource(imagePath))))
+            label.setIcon(ImageIcon(Objects.requireNonNull(javaClass.getResource(imagePath))))
         }
 
         fun createControlsPanel(toolWindow: ToolWindow): JPanel {
             val controlsPanel = JPanel()
             controlsPanel.layout = GridBagLayout()
             controlsPanel.border = BorderFactory.createEmptyBorder(20, 20, 20, 20)
-            val gbc = GridBagConstraints()
-            // Use JBInsets for DPI-aware insets (correct usage)
+            val gridConstraintsLayout = GridBagConstraints()
 
-            gbc.insets = JBInsets.create(10, 0)
-            gbc.anchor = GridBagConstraints.NORTHWEST // Align at the top
-            gbc.fill = GridBagConstraints.HORIZONTAL
-            gbc.weightx = 1.0
+            gridConstraintsLayout.insets = JBInsets.create(10, 0)
+            gridConstraintsLayout.anchor = GridBagConstraints.NORTHWEST // Align at the top
+            gridConstraintsLayout.fill = GridBagConstraints.HORIZONTAL
+            gridConstraintsLayout.weightx = 1.0
 
-            // Button 1: Reformat
-            val reformatButton = instanceButton(
-                "Reformat",
-                "Reformat the current file using project code style.",
-                this::runReformatCommandOnTerminal
+            addRowsToGridConstraints(
+                listOf(
+                    CommandRow(
+                        buttonText = "Reformat",
+                        description = "Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.",
+                        onClick = this::runReformatCommandOnTerminal),
+                    CommandRow(
+                        buttonText = "Compile Project",
+                        description = "Compiles all project sources and resources. Use this to ensure your code builds successfully before running or deploying.",
+                        onClick = this::runBuildCommandOnTerminal)
+                ),
+                gridConstraintsLayout,
+                controlsPanel
             )
-
-            // Multi-line description label with margin
-            val reformatDesc = JLabel("<html><div style='margin-left:12px;width:220px;'>Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.</div></html>")
-            reformatDesc.foreground = JBColor(0x787878, 0x787878)
-            reformatDesc.font = reformatDesc.font.deriveFont(13f)
-
-            // Button 2: Compile Project
-            val buildProjectButton = instanceButton(
-                "Compile Project",
-                "Compile the entire project.",
-                this::runBuildCommandOnTerminal
-            )
-
-            val buildDesc = JLabel("<html><div style='margin-left:12px;width:220px;'>Compiles all project sources and resources. Use this to ensure your code builds successfully before running or deploying.</div></html>")
-            buildDesc.foreground = JBColor(0x787878, 0x787878)
-            buildDesc.font = buildDesc.font.deriveFont(13f)
-
-            // Add first row
-            gbc.gridy = 0
-            gbc.gridx = 0
-            gbc.weightx = 0.0
-            controlsPanel.add(reformatButton, gbc)
-            gbc.gridx = 1
-            gbc.weightx = 1.0
-            controlsPanel.add(reformatDesc, gbc)
-
-            // Add second row
-            gbc.gridy = 1
-            gbc.gridx = 0
-            gbc.weightx = 0.0
-            controlsPanel.add(buildProjectButton, gbc)
-            gbc.gridx = 1
-            gbc.weightx = 1.0
-            controlsPanel.add(buildDesc, gbc)
 
             // Make sure the panel takes all vertical space but aligns content at the top
             val filler = JPanel()
             filler.isOpaque = false
-            gbc.gridy = 2
-            gbc.gridx = 0
-            gbc.gridwidth = 2
-            gbc.weighty = 1.0
-            gbc.fill = GridBagConstraints.BOTH
-            controlsPanel.add(filler, gbc)
+            gridConstraintsLayout.gridy = 2
+            gridConstraintsLayout.gridx = 0
+            gridConstraintsLayout.gridwidth = 2
+            gridConstraintsLayout.weighty = 1.0
+            gridConstraintsLayout.fill = GridBagConstraints.BOTH
+            controlsPanel.add(filler, gridConstraintsLayout)
 
             return controlsPanel
+        }
+
+        fun addRowsToGridConstraints(rows: List<CommandRow>, gridConstraints: GridBagConstraints, panel: JPanel) {
+            for ((index, row) in rows.withIndex()) {
+                gridConstraints.gridy = index
+                gridConstraints.gridx = 0
+                gridConstraints.weightx = 0.0
+                panel.add(row.button, gridConstraints)
+                gridConstraints.gridx = 1
+                gridConstraints.weightx = 1.0
+                panel.add(row.descriptionLabel, gridConstraints)
+            }
         }
 
         fun runReformatCommandOnTerminal() {
@@ -125,6 +108,23 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
 
         fun runBuildCommandOnTerminal() {
             //TODO
+        }
+
+        private class CommandRow(
+            buttonText: String,
+            description: String,
+            onClick: () -> Unit
+        ) {
+            val button = instanceButton(
+                buttonText,
+                description,
+                onClick
+            )
+
+            val descriptionLabel = JLabel("<html><div style='margin-left:12px;width:220px;'>$description</div></html>").apply {
+                foreground = JBColor(0x787878, 0x787878)
+                font = font.deriveFont(13f)
+            }
         }
 
         companion object {
