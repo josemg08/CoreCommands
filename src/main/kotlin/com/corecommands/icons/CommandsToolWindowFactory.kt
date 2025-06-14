@@ -4,12 +4,12 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
+import com.intellij.ui.JBColor
 import com.intellij.ui.content.ContentFactory
+import com.intellij.util.ui.JBInsets
 import java.awt.BorderLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.net.URL
 import java.util.*
 import javax.swing.*
@@ -23,7 +23,7 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val toolWindowContent = CalendarToolWindowContent(toolWindow)
         val content = ContentFactory.getInstance().createContent(toolWindowContent.contentPanel, "", false)
-        toolWindow.getContentManager().addContent(content)
+        toolWindow.contentManager.addContent(content)
     }
 
     private class CalendarToolWindowContent(toolWindow: ToolWindow) {
@@ -58,76 +58,34 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
             controlsPanel.layout = GridBagLayout()
             controlsPanel.border = BorderFactory.createEmptyBorder(20, 20, 20, 20)
             val gbc = GridBagConstraints()
-            gbc.insets = java.awt.Insets(10, 0, 10, 0)
+            // Use JBInsets for DPI-aware insets (correct usage)
+
+            gbc.insets = JBInsets.create(10, 0)
             gbc.anchor = GridBagConstraints.NORTHWEST // Align at the top
             gbc.fill = GridBagConstraints.HORIZONTAL
             gbc.weightx = 1.0
 
             // Button 1: Reformat
-            val reformatButton = JButton("Reformat")
-            reformatButton.toolTipText = "Reformat the current file using project code style."
-            reformatButton.addActionListener { runReformatCommandOnTerminal() }
-            // Rounded border with white color
-            reformatButton.border = BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(java.awt.Color.WHITE, 2, true),
-                BorderFactory.createEmptyBorder(8, 18, 8, 18)
+            val reformatButton = instanceButton(
+                "Reformat",
+                "Reformat the current file using project code style.",
+                this::runReformatCommandOnTerminal
             )
-            reformatButton.isFocusPainted = false
-            reformatButton.isContentAreaFilled = false
-            reformatButton.isOpaque = false
-            reformatButton.foreground = java.awt.Color.WHITE
-            // Add hover/click feedback
-            reformatButton.addMouseListener(object : java.awt.event.MouseAdapter() {
-                override fun mouseEntered(e: java.awt.event.MouseEvent) {
-                    reformatButton.isContentAreaFilled = true
-                    reformatButton.background = java.awt.Color(40, 40, 40)
-                }
-                override fun mouseExited(e: java.awt.event.MouseEvent) {
-                    reformatButton.isContentAreaFilled = false
-                }
-                override fun mousePressed(e: java.awt.event.MouseEvent) {
-                    reformatButton.background = java.awt.Color(70, 70, 70)
-                }
-                override fun mouseReleased(e: java.awt.event.MouseEvent) {
-                    reformatButton.background = java.awt.Color(40, 40, 40)
-                }
-            })
 
             // Multi-line description label with margin
             val reformatDesc = JLabel("<html><div style='margin-left:12px;width:220px;'>Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.</div></html>")
-            reformatDesc.foreground = java.awt.Color(120, 120, 120)
+            reformatDesc.foreground = JBColor(0x787878, 0x787878)
             reformatDesc.font = reformatDesc.font.deriveFont(13f)
 
             // Button 2: Compile Project
-            val buildProjectButton = JButton("Compile Project")
-            buildProjectButton.toolTipText = "Compile the entire project."
-            buildProjectButton.addActionListener { runBuildCommandOnTerminal() }
-            buildProjectButton.border = BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(java.awt.Color.WHITE, 2, true),
-                BorderFactory.createEmptyBorder(8, 18, 8, 18)
+            val buildProjectButton = instanceButton(
+                "Compile Project",
+                "Compile the entire project.",
+                this::runBuildCommandOnTerminal
             )
-            buildProjectButton.isFocusPainted = false
-            buildProjectButton.isContentAreaFilled = false
-            buildProjectButton.isOpaque = false
-            buildProjectButton.foreground = java.awt.Color.WHITE
-            buildProjectButton.addMouseListener(object : java.awt.event.MouseAdapter() {
-                override fun mouseEntered(e: java.awt.event.MouseEvent) {
-                    buildProjectButton.isContentAreaFilled = true
-                    buildProjectButton.background = java.awt.Color(40, 40, 40)
-                }
-                override fun mouseExited(e: java.awt.event.MouseEvent) {
-                    buildProjectButton.isContentAreaFilled = false
-                }
-                override fun mousePressed(e: java.awt.event.MouseEvent) {
-                    buildProjectButton.background = java.awt.Color(70, 70, 70)
-                }
-                override fun mouseReleased(e: java.awt.event.MouseEvent) {
-                    buildProjectButton.background = java.awt.Color(40, 40, 40)
-                }
-            })
 
             val buildDesc = JLabel("<html><div style='margin-left:12px;width:220px;'>Compiles all project sources and resources. Use this to ensure your code builds successfully before running or deploying.</div></html>")
-            buildDesc.foreground = java.awt.Color(120, 120, 120)
+            buildDesc.foreground = JBColor(0x787878, 0x787878)
             buildDesc.font = buildDesc.font.deriveFont(13f)
 
             // Add first row
@@ -162,11 +120,11 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
         }
 
         fun runReformatCommandOnTerminal() {
-
+            //TODO
         }
 
         fun runBuildCommandOnTerminal() {
-
+            //TODO
         }
 
         companion object {
