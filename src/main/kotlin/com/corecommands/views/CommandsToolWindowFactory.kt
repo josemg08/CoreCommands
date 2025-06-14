@@ -1,5 +1,6 @@
 package com.corecommands.views
 
+import com.corecommands.terminal.TerminalRunner
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -25,15 +26,16 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
      * param command The command to be executed when the button is clicked.
     __.*/
     private fun initCommandRows(project: Project): List<CommandRow> {
+        val terminalRunner = TerminalRunner(project = project)
         return listOf(
             CommandRow(
-                project = project,
+                terminalRunner = terminalRunner,
                 buttonText = "Reformat",
                 description = "Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.",
                 command = "./local_helpers.sh -f RUN_FORMAT"
             ),
             CommandRow(
-                project = project,
+                terminalRunner = terminalRunner,
                 buttonText = "Build Project",
                 description = "Build all project sources and resources. Use this to ensure your code builds successfully before running.",
                 command = "./gradlew app:assembleGoogleDebug"

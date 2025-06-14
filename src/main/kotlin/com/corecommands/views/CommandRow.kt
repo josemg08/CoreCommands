@@ -1,12 +1,11 @@
 package com.corecommands.views
 
-import com.intellij.openapi.project.Project
+import com.corecommands.terminal.TerminalRunner
 import com.intellij.ui.JBColor
-import runCommandInTerminal
 import javax.swing.JLabel
 
 class CommandRow(
-    project: Project,
+    terminalRunner: TerminalRunner,
     buttonText: String,
     description: String,
     command: String
@@ -15,8 +14,7 @@ class CommandRow(
         text = buttonText,
         toolTip = description,
         onClick = {
-            runCommandInTerminal(
-                project = project,
+            terminalRunner.runCommandInTerminal(
                 command = command
             )
         }
