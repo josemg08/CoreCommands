@@ -27,7 +27,7 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Core Commands" secondary="true" icon="/icons/androidMustache.svg" anchor="right"
+        <toolWindow id="Core Commands" secondary="true" icon="/icons/icon_jg.svg" anchor="right"
                     factoryClass="com.corecommands.views.CommandsToolWindowFactory"/>
     </extensions>
 </idea-plugin>
