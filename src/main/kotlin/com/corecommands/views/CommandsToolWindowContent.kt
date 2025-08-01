@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.BorderFactory
 import javax.swing.JPanel
+import kotlin.collections.fill
 
 class CommandsToolWindowContent(commandRows: List<CommandRow>) {
     val contentPanel: JPanel = JPanel()
@@ -27,13 +28,14 @@ class CommandsToolWindowContent(commandRows: List<CommandRow>) {
     fun createControlsPanel(commandRow: List<CommandRow>): JPanel {
         val controlsPanel = JPanel()
         controlsPanel.layout = GridBagLayout()
-        controlsPanel.border = BorderFactory.createEmptyBorder(10, 20, 20, 20)  // Reduced top padding
+        controlsPanel.border = BorderFactory.createEmptyBorder(10, 20, 20, 20)
         val gridConstraintsLayout = GridBagConstraints()
 
         gridConstraintsLayout.insets = JBInsets.create(10, 0)
-        gridConstraintsLayout.anchor = GridBagConstraints.NORTHWEST // Align at the top
+        gridConstraintsLayout.anchor = GridBagConstraints.NORTHWEST
         gridConstraintsLayout.fill = GridBagConstraints.HORIZONTAL
         gridConstraintsLayout.weightx = 1.0
+        gridConstraintsLayout.weighty = 0.0  // Set to 0.0 for regular rows
 
         addRowsToGridConstraints(
             rows = commandRow,
@@ -41,13 +43,13 @@ class CommandsToolWindowContent(commandRows: List<CommandRow>) {
             controlsPanel
         )
 
-        // Make sure the panel takes all vertical space but aligns content at the top
+        // Add a single filler panel at the very end
         val filler = JPanel()
         filler.isOpaque = false
-        gridConstraintsLayout.gridy = 2
+        gridConstraintsLayout.gridy = commandRow.size  // Set to after the last command row
         gridConstraintsLayout.gridx = 0
         gridConstraintsLayout.gridwidth = 2
-        gridConstraintsLayout.weighty = 1.0
+        gridConstraintsLayout.weighty = 1.0  // Only the filler should expand
         gridConstraintsLayout.fill = GridBagConstraints.BOTH
         controlsPanel.add(filler, gridConstraintsLayout)
 

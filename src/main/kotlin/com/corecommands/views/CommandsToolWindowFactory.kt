@@ -1,5 +1,6 @@
 package com.corecommands.views
 
+import com.corecommands.config.CommandConfigManager
 import com.corecommands.terminal.TerminalRunner
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
@@ -8,7 +9,6 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.ContentFactory
 
 internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
-
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val commandRows = initCommandRows(project)
         val toolWindowContent = CommandsToolWindowContent(commandRows = commandRows)
@@ -27,25 +27,15 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
     __.*/
     private fun initCommandRows(project: Project): List<CommandRow> {
         val terminalRunner = TerminalRunner(project = project)
-        return listOf(
+        val configManager = CommandConfigManager(project)
+
+        return configManager.getCommands().map { config ->
             CommandRow(
                 terminalRunner = terminalRunner,
-                buttonText = "Assemble Debug",
-                description = "Builds the debug version of your app (app.debug).",
-                command = "./gradlew assembleDebug"
-            ),
-            CommandRow(
-                terminalRunner = terminalRunner,
-                buttonText = "Build Project",
-                description = "Commands for Android development clean the project.",
-                command = "./gradlew clean"
-            ),
-            CommandRow(
-                terminalRunner = terminalRunner,
-                buttonText = "Run lint checks",
-                description = "Run lint checks.",
-                command = "./gradlew lint"
+                buttonText = config.buttonText,
+                description = config.description,
+                command = config.command
             )
-        )
+        }
     }
 }

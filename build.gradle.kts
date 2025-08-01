@@ -26,6 +26,8 @@ dependencies {
         // bundledPlugin("com.intellij.java")
         bundledPlugin("org.jetbrains.plugins.terminal")
     }
+
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 intellijPlatform {
