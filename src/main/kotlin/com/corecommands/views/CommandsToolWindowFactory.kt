@@ -12,7 +12,7 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val commandRows = initCommandRows(project)
         val toolWindowContent = CommandsToolWindowContent(commandRows = commandRows)
-        val content = ContentFactory.getInstance().createContent(toolWindowContent.contentPanel, "", false)
+        val content = ContentFactory.getInstance().createContent(toolWindowContent.scrollPane, "", false)
         toolWindow.contentManager.addContent(content)
     }
 
@@ -30,15 +30,21 @@ internal class CommandsToolWindowFactory : ToolWindowFactory, DumbAware {
         return listOf(
             CommandRow(
                 terminalRunner = terminalRunner,
-                buttonText = "Reformat",
-                description = "Reformats the current file according to code style settings. This can help keep your code clean and consistent with project standards.",
-                command = "./local_helpers.sh -f RUN_FORMAT"
+                buttonText = "Assemble Debug",
+                description = "Builds the debug version of your app (app.debug).",
+                command = "./gradlew assembleDebug"
             ),
             CommandRow(
                 terminalRunner = terminalRunner,
                 buttonText = "Build Project",
-                description = "Build all project sources and resources. Use this to ensure your code builds successfully before running.",
-                command = "./gradlew app:assembleGoogleDebug"
+                description = "Commands for Android development clean the project.",
+                command = "./gradlew clean"
+            ),
+            CommandRow(
+                terminalRunner = terminalRunner,
+                buttonText = "Run lint checks",
+                description = "Run lint checks.",
+                command = "./gradlew lint"
             )
         )
     }
