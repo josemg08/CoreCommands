@@ -1,30 +1,45 @@
 package com.corecommands.terminal
 
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.terminal.ShellTerminalWidget
-import org.jetbrains.plugins.terminal.TerminalView
+import com.intellij.openapi.util.Disposer
+import com.intellij.terminal.ui.TerminalWidget
+import org.jetbrains.plugins.terminal.TerminalToolWindowManager
 
-class TerminalRunner(private val project: Project) {
+class TerminalRunner(project: Project) {
 
     private val terminalName = "Core Commands"
 
-    private val terminalView = TerminalView.getInstance(project)
-    private var shell: ShellTerminalWidget? = null
+    private val terminalToolWindowManager = TerminalToolWindowManager.getInstance(project)
+    private var shellWidget: TerminalWidget? = null
 
     fun getShell() {
-        shell = terminalView.createLocalShellWidget(project.basePath, terminalName)
+        shellWidget = terminalToolWindowManager.createShellWidget(
+            null,
+            terminalName,
+            true,
+            true
+        )
+
+        shellWidget?.let { setupTerminalCloseListener(it) }
+    }
+
+    fun setupTerminalCloseListener(terminalWidget: TerminalWidget) {
+        val cleanupLogic = Disposable {
+            // This code block runs when the terminalWidget is closed.
+            shellWidget = null // Clear the reference to the closed widget
+        }
+
+        // Register your cleanup logic. When `terminalWidget` is disposed,
+        // `cleanupLogic` will also be disposed, and its lambda will run.
+        Disposer.register(terminalWidget, cleanupLogic)
     }
 
     fun runCommandInTerminal(command: String) {
-        if (shell == null || terminalView.getWidgets().isEmpty()) {
+        if (shellWidget == null) {
             getShell()
-            shell!!.executeCommand(command)
-        } else {
-            if (shell!!.hasRunningCommands()) {
-                // TODO
-            } else {
-                shell!!.executeCommand(command)
-            }
         }
+
+        shellWidget?.sendCommandToExecute(command)
     }
 }
