@@ -1,20 +1,17 @@
-# CoreCommands
+# <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Plugin Icon" width="24"> CoreCommands
 
 <div align="center">
 
-![Plugin Icon](src/main/resources/icons/icon_jg.svg)
-
-[![Build](https://img.shields.io/github/workflow/status/josemaria-gonzales/CoreCommands/Build)](https://github.com/josemaria-gonzales/CoreCommands/actions)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![License](https://img.shields.io/github/license/josemaria-gonzales/CoreCommands)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/josemaria-gonzales/CoreCommands/releases)
+[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=red)](https://github.com/henriquesebastiao/badges/blob/main/LICENSE)
+[![GitHub License](https://img.shields.io/badge/Kotlin-7F52FF?&style=flat&logo=kotlin&logoColor=white)](https://github.com/josemg08/CoreCommands/blob/main/LICENSE)
 
 </div>
 
-## Description
-CoreCommands is a IntelliJ IDEA plugin that enhances your development workflow by providing a convenient toolwindow with quick-access buttons for commonly used terminal commands. Boost your productivity by executing frequent commands with a single click.
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Description
+CoreCommands is a IntelliJ IDEA plugin that enhances your development workflow by providing a convenient toolwindow with quick-access buttons for commonly used terminal commands. Boost your productivity by executing frequent commands with a single click and save any command you want.
 
-## Installation
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Installation
 
 ### From JetBrains Marketplace
 - Open IntelliJ IDEA
@@ -22,25 +19,26 @@ CoreCommands is a IntelliJ IDEA plugin that enhances your development workflow b
 - Search for "CoreCommands"
 - Click `Install`
 
-### Manual Installation
-1. Download the latest release from the [releases page](https://github.com/josemaria-gonzales/CoreCommands/releases)
-2. Open IntelliJ IDEA
-3. Go to `Settings/Preferences → Plugins`
-4. Click the gear icon and select `Install Plugin from Disk...`
-5. Select the downloaded file
-6. Restart IDE when prompted
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Manual Build & Installation
 
-## Building from Source
+### Building from Source
 ```bash
 ./gradlew build
 ```
 The plugin artifact will be generated in `build/libs/CoreCommands-*.jar`
 
-## Requirements
+### Manual Installation
+- Open IntelliJ IDEA
+- Go to `Settings/Preferences → Plugins`
+- Click the gear icon and select `Install Plugin from Disk...`
+- Select the generated jar
+- Restart IDE when prompted
+
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Requirements
 - IntelliJ IDEA 2025.1 or later
 - Java 11 or later
 
-## Technical Details
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Technical Details
 - **Plugin SDK Version**: 2025.1
 - **Build System**: Gradle with Kotlin DSL
 - **Main Technologies**: 
@@ -48,21 +46,12 @@ The plugin artifact will be generated in `build/libs/CoreCommands-*.jar`
   - IntelliJ Platform SDK
   - Terminal Plugin Integration
 
-## Contributing
+## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Contributing
 Contributions are welcome! Feel free to:
 - 🐛 Report bugs
 - 💡 Suggest features
 - 🔧 Submit pull requests
 
-## License
-This project is licensed under the terms of the [LICENSE](LICENSE) file included in the repository.
-
-## Support
-- 📫 Report issues on our [Issue Tracker](https://github.com/josemaria-gonzales/CoreCommands/issues)
-- 💬 Ask questions in our [Discussions](https://github.com/josemaria-gonzales/CoreCommands/discussions)
-
 ---
 
-<div align="center">
-
-</div>
+<div align="center"></div>

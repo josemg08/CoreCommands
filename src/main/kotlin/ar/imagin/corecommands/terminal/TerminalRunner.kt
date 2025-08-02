@@ -1,4 +1,4 @@
-package com.corecommands.terminal
+package ar.imagin.corecommands.terminal
 
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project

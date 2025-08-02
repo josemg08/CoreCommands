@@ -1,4 +1,4 @@
-package com.corecommands.views
+package ar.imagin.corecommands.views
 
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.util.ui.JBInsets
@@ -7,7 +7,6 @@ import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.BorderFactory
 import javax.swing.JPanel
-import kotlin.collections.fill
 
 class CommandsToolWindowContent(commandRows: List<CommandRow>) {
     val contentPanel: JPanel = JPanel()

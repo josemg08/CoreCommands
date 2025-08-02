@@ -1,4 +1,4 @@
-package com.corecommands.views
+package ar.imagin.corecommands.views
 
 import com.intellij.ui.JBColor
 import java.awt.Dimension

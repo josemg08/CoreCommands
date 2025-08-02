@@ -1,4 +1,4 @@
-package com.corecommands.config
+package ar.imagin.corecommands.config
 
 import com.google.gson.GsonBuilder
 import com.intellij.openapi.project.Project

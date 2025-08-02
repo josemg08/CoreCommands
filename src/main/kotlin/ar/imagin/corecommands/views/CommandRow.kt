@@ -1,6 +1,6 @@
-package com.corecommands.views
+package ar.imagin.corecommands.views
 
-import com.corecommands.terminal.TerminalRunner
+import ar.imagin.corecommands.terminal.TerminalRunner
 import com.intellij.ui.JBColor
 import javax.swing.JLabel
 import javax.swing.JPanel

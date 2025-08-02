@@ -1,7 +1,7 @@
-package com.corecommands.views
+package ar.imagin.corecommands.views
 
-import com.corecommands.config.CommandConfigManager
-import com.corecommands.terminal.TerminalRunner
+import ar.imagin.corecommands.config.CommandConfigManager
+import ar.imagin.corecommands.terminal.TerminalRunner
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow

@@ -1,4 +1,4 @@
-package com.corecommands.config
+package ar.imagin.corecommands.config
 
 data class CommandConfig(
     val buttonText: String,
