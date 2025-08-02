@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/josemaria-gonzales/CoreCommands/releases)
-[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=red)](https://github.com/henriquesebastiao/badges/blob/main/LICENSE)
+[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=black)](https://github.com/henriquesebastiao/badges/blob/main/LICENSE)
 [![GitHub License](https://img.shields.io/badge/Kotlin-7F52FF?&style=flat&logo=kotlin&logoColor=white)](https://github.com/josemg08/CoreCommands/blob/main/LICENSE)
 
 </div>
@@ -19,19 +19,21 @@ CoreCommands is a IntelliJ IDEA plugin that enhances your development workflow b
 - Search for "CoreCommands"
 - Click `Install`
 
+You can also find the plugin on the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/28077-corecommands).
+
 ## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Manual Build & Installation
 
 ### Building from Source
 ```bash
-./gradlew build
+./gradlew buildPlugin
 ```
-The plugin artifact will be generated in `build/libs/CoreCommands-*.jar`
+The plugin artifact will be generated in `build/distributions/CoreCommands-*.zip`
 
 ### Manual Installation
 - Open IntelliJ IDEA
 - Go to `Settings/Preferences → Plugins`
 - Click the gear icon and select `Install Plugin from Disk...`
-- Select the generated jar
+- Select the generated zip
 - Restart IDE when prompted
 
 ## ![Plugin Icon](src/main/resources/icons/icon_jg.svg) Requirements
