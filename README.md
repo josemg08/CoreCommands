@@ -2,8 +2,10 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/josemaria-gonzales/CoreCommands/releases)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)]([https://github.com/josemaria-gonzales/CoreCommands/releases](https://github.com/josemg08/CoreCommands/releases/tag/Version_1.0.1))
 [![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=black)](https://github.com/henriquesebastiao/badges/blob/main/LICENSE)
+![JetBrains IntelliJ Platform SDK Docs](https://jb.gg/badges/docs.svg?style=flat-square)
+![Bluesky](https://img.shields.io/badge/%40platform.jetbrains.com-0285FF?logo=bluesky&logoColor=fff)
 [![GitHub License](https://img.shields.io/badge/Kotlin-7F52FF?&style=flat&logo=kotlin&logoColor=white)](https://github.com/josemg08/CoreCommands/blob/main/LICENSE)
 
 </div>
