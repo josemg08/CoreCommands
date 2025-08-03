@@ -1,12 +1,11 @@
 # <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Plugin Icon" width="24"> CoreCommands
 
-<div align="center">
+<div align="end">
 
-[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)]([https://github.com/josemaria-gonzales/CoreCommands/releases](https://github.com/josemg08/CoreCommands/releases/tag/Version_1.0.1))
-[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=black)](https://github.com/henriquesebastiao/badges/blob/main/LICENSE)
-![JetBrains IntelliJ Platform SDK Docs](https://jb.gg/badges/docs.svg?style=flat-square)
-![Bluesky](https://img.shields.io/badge/%40platform.jetbrains.com-0285FF?logo=bluesky&logoColor=fff)
-[![GitHub License](https://img.shields.io/badge/Kotlin-7F52FF?&style=flat&logo=kotlin&logoColor=white)](https://github.com/josemg08/CoreCommands/blob/main/LICENSE)
+[![Jetbrains Marketplace](https://img.shields.io/badge/Jetbrains%20Marketplace%20-%20version%201.0.1%20-%20red)][jb:marketPlace]
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)][jb:version]
+[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/badges?color=black)][jb:license]
+[![JetBrains IntelliJ Platform SDK Docs](https://jb.gg/badges/docs.svg?style=flat-square)][jb:docs]
 
 </div>
 
@@ -59,3 +58,8 @@ Contributions are welcome! Feel free to:
 ---
 
 <div align="center"></div>
+
+[jb:docs]: https://plugins.jetbrains.com/docs/intellij/
+[jb:license]: https://github.com/josemg08/CoreCommands/blob/main/LICENSE
+[jb:version]: https://github.com/josemg08/CoreCommands/releases/tag/Version_1.0.1
+[jb:marketPlace]: https://plugins.jetbrains.com/plugin/28077-corecommands/reviews?noRedirect=true
