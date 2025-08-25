@@ -9,6 +9,7 @@
 ### IntelliJ IDEA ###
 .idea/*
 !.idea/icon.svg
+!.idea/.gitignore
 .kotlin/*
 *.iws
 *.iml
